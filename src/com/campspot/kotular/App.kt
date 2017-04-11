@@ -9,8 +9,10 @@ import com.campspot.kotular.js.JsArray
  * Created by bradensteffaniak on 4/11/17.
  */
 
-external interface FilterFilter {
-    operator fun invoke(data: Array<Todo>, completed: Boolean): Array<Todo>
+object FilterFilter {
+    fun filter(data: JsArray<Todo>, completed: Boolean): JsArray<Todo> {
+        return data.filter { it.completed == completed }
+    }
 }
 
 fun main(args: Array<String>) {

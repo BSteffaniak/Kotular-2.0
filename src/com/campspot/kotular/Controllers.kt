@@ -29,7 +29,7 @@ external interface TodoScope : Scope {
     var markAll: (Boolean) -> Unit
 }
 
-fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, filterFilter: FilterFilter) {
+fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, filterFilter: (JsArray<Todo>, Boolean) -> JsArray<Todo>) {
 
     scope.todos = todoStorage.get()
     scope.newTodo = ""
