@@ -16,7 +16,7 @@ object FilterFilter {
 }
 
 fun main(args: Array<String>) {
-    val todomvc = angular.module("todomvc", JsArray())
+    val todomvc = angular.module("todomvc", JsArray("ngRoute"))
     todomvc.filter("filter", { FilterFilter::filter })
     todomvc.factory("todoStorage", JsArray({ TodoStorage() }))
     todomvc.directive("todoFocus", JsArray("\$timeout", ::todoFocus))
@@ -24,6 +24,6 @@ fun main(args: Array<String>) {
 
     todomvc.config(JsArray("\$routeProvider", {
         routeProvider: Router ->
-        routeProvider.route("test", Route("templates/test.html", "TodoCtrl", "ctrl"))
+        routeProvider.route("/test", Route("templates/test.html", "TodoCtrl", "ctrl"))
     }))
 }
