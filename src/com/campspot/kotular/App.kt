@@ -1,7 +1,7 @@
 package com.campspot.kotular
 
-import com.campspot.kotular.angular.Location
-import com.campspot.kotular.angular.Timeout
+import com.campspot.kotular.angular.Route
+import com.campspot.kotular.angular.Router
 import com.campspot.kotular.angular.angular
 import com.campspot.kotular.js.JsArray
 
@@ -22,3 +22,8 @@ fun main(args: Array<String>) {
     todomvc.directive("todoFocus", JsArray("\$timeout", ::todoFocus))
     todomvc.controller("TodoCtrl", JsArray("\$scope", "\$location", "todoStorage", "filterFilter", ::TodoCtrl))
 
+    todomvc.config(JsArray("\$routeProvider", {
+        routeProvider: Router ->
+        routeProvider.route("test", Route("templates/test.html", "TodoCtrl", "ctrl"))
+    }))
+}
