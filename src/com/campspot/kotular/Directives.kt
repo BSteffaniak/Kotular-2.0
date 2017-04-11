@@ -19,7 +19,7 @@ fun todoFocus(timeout: Timeout): Directive {
         val attrs = _attrs as Attrs
         scope.watch(attrs.todoFocus, { newVal ->
             if(newVal as Boolean) {
-                js("timeout(function () { elem[0].focus() }, 0, false)")
+                timeout({ elem[0].focus() }, 0, false)
             }
         })
     }
