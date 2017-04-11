@@ -14,6 +14,8 @@ external interface Module {
     fun directive(name: String, injectsAndDef: JsArray<Any>): Unit
     fun factory (name: String, injectsAndDef: JsArray<Any>): Unit
     fun controller(name: String, injectsAndDef: JsArray<Any>): Unit
+    fun config(injectsAndDef: JsArray<Any>): Unit
+    fun filter(name: String, lambda: Any): Unit
 }
 
 external interface ElemNode {
