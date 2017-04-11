@@ -20,6 +20,10 @@ external interface Module {
 
 data class Route(val templateUrl: String, val controller: String, val controllerAs: String)
 
+external interface Router {
+    @JsName("when") fun route(url: String, route: Route): Router
+}
+
 external interface ElemNode {
     fun focus()
 }
