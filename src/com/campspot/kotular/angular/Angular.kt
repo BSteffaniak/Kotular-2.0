@@ -30,7 +30,7 @@ external interface ElemNode {
 
 external interface Elem {
     fun bind(name: String, func: () -> Unit)
-    fun get(index: Int): ElemNode
+    operator fun get(index: Int): ElemNode
 }
 
 external class Directive {
@@ -38,7 +38,7 @@ external class Directive {
 }
 
 external interface Timeout {
-    fun invoke(func: () -> Unit, x: Int, y: Boolean)
+    operator fun invoke(func: () -> Unit, x: Int, y: Boolean)
 }
 
 external interface Location {
