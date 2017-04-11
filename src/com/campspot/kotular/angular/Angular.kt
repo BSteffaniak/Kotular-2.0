@@ -1,17 +1,19 @@
 package com.campspot.kotular.angular
 
+import com.campspot.kotular.js.JsArray
+
 /**
  * Created by bradensteffaniak on 4/11/17.
  */
 
 external interface Angular {
-    fun module(name: String, deps: Array<String>): Module
+    fun module(name: String, deps: JsArray<String>): Module
 }
 
 external interface Module {
-    fun directive(name: String, injectsAndDef: Array<Any>): Unit
-    fun factory (name: String, injectsAndDef: Array<Any>): Unit
-    fun controller(name: String, injectsAndDef: Array<Any>): Unit
+    fun directive(name: String, injectsAndDef: JsArray<Any>): Unit
+    fun factory (name: String, injectsAndDef: JsArray<Any>): Unit
+    fun controller(name: String, injectsAndDef: JsArray<Any>): Unit
 }
 
 external interface ElemNode {

@@ -1,6 +1,7 @@
 package com.campspot.kotular
 
 import com.campspot.kotular.angular.*;
+import com.campspot.kotular.js.JsArray
 
 /**
  * Created by bradensteffaniak on 4/11/17.
@@ -11,8 +12,8 @@ external class Todo {
     var completed: Boolean
 }
 
-external interface TodoScope: Scope {
-    var todos: Array<Todo>
+external interface TodoScope : Scope {
+    var todos: JsArray<Todo>
     var newTodo: String
     var editedTodo: Todo?
     var remainingCount: Int

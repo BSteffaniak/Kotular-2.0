@@ -3,6 +3,7 @@ package com.campspot.kotular
 import com.campspot.kotular.angular.Location
 import com.campspot.kotular.angular.Timeout
 import com.campspot.kotular.angular.angular
+import com.campspot.kotular.js.JsArray
 
 /**
  * Created by bradensteffaniak on 4/11/17.
@@ -13,13 +14,9 @@ external interface FilterFilter {
 }
 
 fun main(args: Array<String>) {
-    var todomvc = angular.module("todomvc", array())
-    todomvc.factory("todoStorage", array<Any>({ TodoStorage() }))
-    todomvc.directive("todoFocus", array<Any>("\$timeout", {x: Timeout -> todoFocus(x) }))
-    todomvc.controller("TodoCtrl", array<Any>("\$scope", "\$location", "todoStorage", "filterFilter", {
-        a: TodoScope, b: Location, c: TodoStorage, d: FilterFilter ->
-        TodoCtrl(a, b, c, d)
-    }))
-}
+    val todomvc = angular.module("todomvc", JsArray())
+    todomvc.filter("filter", { FilterFilter::filter })
+    todomvc.factory("todoStorage", JsArray({ TodoStorage() }))
+    todomvc.directive("todoFocus", JsArray("\$timeout", ::todoFocus))
+    todomvc.controller("TodoCtrl", JsArray("\$scope", "\$location", "todoStorage", "filterFilter", ::TodoCtrl))
 
-external fun <X> array(vararg x: Any): Array<X>
