@@ -58,3 +58,4 @@ external interface LocalStorage {
 }
 
 external val angular: Angular
+@JsName("this") external val controllerScope: Scope

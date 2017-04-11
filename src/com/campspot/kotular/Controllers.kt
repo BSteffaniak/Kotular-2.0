@@ -28,7 +28,7 @@ external interface TodoScope : Scope {
 }
 
 fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, filterFilter: (JsArray<Todo>, Boolean) -> JsArray<Todo>) {
-    val ctrl = js("this") as TodoScope
+    val ctrl = controllerScope as TodoScope
 
     ctrl.todos = todoStorage.get()
     ctrl.newTodo = ""
