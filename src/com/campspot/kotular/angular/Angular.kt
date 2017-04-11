@@ -18,6 +18,8 @@ external interface Module {
     fun filter(name: String, lambda: Any): Unit
 }
 
+data class Route(val templateUrl: String, val controller: String, val controllerAs: String)
+
 external interface ElemNode {
     fun focus()
 }
