@@ -1,6 +1,6 @@
 package com.campspot.kotular
 
-import com.campspot.kotular.angular.*;
+import com.campspot.kotular.angular.*
 import com.campspot.kotular.js.JsArray
 
 /**
@@ -36,10 +36,10 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
     ctrl.test = "jello"
 
     scope.watch("todos", {
-        scope.remainingCount = filterFilter(scope.todos, false).size
-        scope.completedCount = scope.todos.size - scope.remainingCount
-        scope.completedCount = scope.todos.size - scope.remainingCount
-        scope.allChecked = scope.remainingCount == 0
+        ctrl.remainingCount = filterFilter(ctrl.todos, false).size
+        ctrl.completedCount = ctrl.todos.size - ctrl.remainingCount
+        ctrl.completedCount = ctrl.todos.size - ctrl.remainingCount
+        ctrl.allChecked = ctrl.remainingCount == 0
     }, true)
 
     if(location.path() == "") {
@@ -49,7 +49,7 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
     ctrl.location = location
 
     scope.watch("location.path()", { path ->
-        scope.statusFilter = when(path) {
+        ctrl.statusFilter = when(path) {
             "/active" -> false
             "/completed" -> true
             else -> null
@@ -57,32 +57,32 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
     })
 
     ctrl.addTodo = {
-        if(scope.newTodo.isNotEmpty()) {
-            scope.todos.push(Todo(scope.newTodo, false))
-            scope.newTodo = ""
+        if(ctrl.newTodo.isNotEmpty()) {
+            ctrl.todos.push(Todo(ctrl.newTodo, false))
+            ctrl.newTodo = ""
         }
     }
 
     ctrl.editTodo = { todo ->
-        scope.editedTodo = todo
+        ctrl.editedTodo = todo
     }
 
     ctrl.doneEditing = { todo ->
-        scope.editedTodo = null
+        ctrl.editedTodo = null
         if(todo.title != null) {
-            scope.removeTodo(todo)
+            ctrl.removeTodo(todo)
         }
     }
 
     ctrl.removeTodo = { todo ->
-        scope.todos.splice(scope.todos.indexOf(todo), 1)
+        ctrl.todos.splice(ctrl.todos.indexOf(todo), 1)
     }
 
     ctrl.clearCompletedTodos = {
-        scope.todos = scope.todos.filter({ !it.completed })
+        ctrl.todos = ctrl.todos.filter({ !it.completed })
     }
 
     ctrl.markAll = { completed ->
-        scope.todos.forEach({ it.completed = completed })
+        ctrl.todos.forEach({ it.completed = completed })
     }
 }
