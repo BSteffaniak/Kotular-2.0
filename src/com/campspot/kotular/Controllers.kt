@@ -30,10 +30,12 @@ external interface TodoScope : Scope {
 }
 
 fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, filterFilter: (JsArray<Todo>, Boolean) -> JsArray<Todo>) {
+    val ctrl = js("this") as TodoScope
 
-    scope.todos = todoStorage.get()
-    scope.newTodo = ""
-    scope.editedTodo = null
+    ctrl.todos = todoStorage.get()
+    ctrl.newTodo = ""
+    ctrl.editedTodo = null
+    ctrl.test = "jello"
 
     scope.watch("todos", {
         scope.remainingCount = filterFilter(scope.todos, false).size
@@ -46,7 +48,7 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
         location.path("/")
     }
 
-    scope.location = location
+    ctrl.location = location
 
     scope.watch("location.path()", { path ->
         scope.statusFilter = when(path) {
@@ -56,36 +58,33 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
         }
     })
 
-    scope.addTodo = {
-        if(scope.newTodo.length > 0) {
-            val todo = Todo()
-            todo.title = scope.newTodo
-            todo.completed = false
-            js("scope.todos.push(todo)")
+    ctrl.addTodo = {
+        if(scope.newTodo.isNotEmpty()) {
+            scope.todos.push(Todo(scope.newTodo, false))
             scope.newTodo = ""
         }
     }
 
-    scope.editTodo = { todo ->
+    ctrl.editTodo = { todo ->
         scope.editedTodo = todo
     }
 
-    scope.doneEditing = { todo ->
+    ctrl.doneEditing = { todo ->
         scope.editedTodo = null
         if(todo.title != null) {
             scope.removeTodo(todo)
         }
     }
 
-    scope.removeTodo = { todo ->
-        js("scope.todos.splice(scope.todos.indexOf(todo), 1)")
+    ctrl.removeTodo = { todo ->
+        scope.todos.splice(scope.todos.indexOf(todo), 1)
     }
 
-    scope.clearCompletedTodos = {
-        js("scope.todos = scope.todos.filter(function (it) { !it.completed })")
+    ctrl.clearCompletedTodos = {
+        scope.todos = scope.todos.filter({ !it.completed })
     }
 
-    scope.markAll = { completed ->
+    ctrl.markAll = { completed ->
         scope.todos.forEach({ it.completed = completed })
     }
 }
