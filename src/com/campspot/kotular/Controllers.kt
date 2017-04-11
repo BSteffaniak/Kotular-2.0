@@ -7,10 +7,7 @@ import com.campspot.kotular.js.JsArray
  * Created by bradensteffaniak on 4/11/17.
  */
 
-external class Todo {
-    var title: String?
-    var completed: Boolean
-}
+data class Todo(var title: String? = "", var completed: Boolean = false)
 
 external interface TodoScope : Scope {
     var todos: JsArray<Todo>
