@@ -17,6 +17,7 @@ object FilterFilter {
 
 fun main(args: Array<String>) {
     val todomvc = angular.module("todomvc", JsArray("ngRoute"))
+
     todomvc.filter("filter", { FilterFilter::filter })
     todomvc.factory("todoStorage", JsArray({ TodoStorage() }))
     todomvc.directive("todoFocus", JsArray("\$timeout", ::todoFocus))

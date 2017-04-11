@@ -15,7 +15,9 @@ external interface Attrs {
 
 fun todoFocus(timeout: Timeout): Directive {
     val directive = Directive()
-    directive.link = { scope, elem, _attrs ->
+
+    directive.link = {
+        scope, elem, _attrs ->
         val attrs = _attrs as Attrs
         scope.watch(attrs.todoFocus, { newVal ->
             if(newVal as Boolean) {
@@ -23,12 +25,14 @@ fun todoFocus(timeout: Timeout): Directive {
             }
         })
     }
+    
     return directive
 }
 
 fun todoBlur(): Directive {
     val directive = Directive()
-    directive.link = { scope, elem, _attrs ->
+    directive.link = {
+        scope, elem, _attrs ->
         val attrs = _attrs as Attrs
         scope.apply(attrs.todoBlur)
     }

@@ -48,7 +48,8 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
 
     ctrl.location = location
 
-    scope.watch("location.path()", { path ->
+    scope.watch("location.path()", {
+        path ->
         ctrl.statusFilter = when(path) {
             "/active" -> false
             "/completed" -> true
@@ -63,18 +64,21 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
         }
     }
 
-    ctrl.editTodo = { todo ->
+    ctrl.editTodo = {
+        todo ->
         ctrl.editedTodo = todo
     }
 
-    ctrl.doneEditing = { todo ->
+    ctrl.doneEditing = {
+        todo ->
         ctrl.editedTodo = null
         if(todo.title != null) {
             ctrl.removeTodo(todo)
         }
     }
 
-    ctrl.removeTodo = { todo ->
+    ctrl.removeTodo = {
+        todo ->
         ctrl.todos.splice(ctrl.todos.indexOf(todo), 1)
     }
 
@@ -82,7 +86,8 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
         ctrl.todos = ctrl.todos.filter({ !it.completed })
     }
 
-    ctrl.markAll = { completed ->
+    ctrl.markAll = {
+        completed ->
         ctrl.todos.forEach({ it.completed = completed })
     }
 }
