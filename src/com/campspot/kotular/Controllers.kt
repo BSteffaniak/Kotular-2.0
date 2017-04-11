@@ -27,6 +27,7 @@ external interface TodoScope : Scope {
     var removeTodo: (Todo) -> Unit
     var clearCompletedTodos: () -> Unit
     var markAll: (Boolean) -> Unit
+    var test: String
 }
 
 fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, filterFilter: (JsArray<Todo>, Boolean) -> JsArray<Todo>) {
