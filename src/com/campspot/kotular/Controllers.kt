@@ -35,7 +35,7 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
     scope.newTodo = ""
     scope.editedTodo = null
 
-    scope.`$watch`("todos", {
+    scope.watch("todos", {
         scope.remainingCount = filterFilter(scope.todos, false).size
         scope.completedCount = scope.todos.size - scope.remainingCount
         scope.completedCount = scope.todos.size - scope.remainingCount
@@ -48,7 +48,7 @@ fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, fil
 
     scope.location = location
 
-    scope.`$watch`("location.path()", { path ->
+    scope.watch("location.path()", { path ->
         scope.statusFilter = when(path) {
             "/active" -> false
             "/completed" -> true

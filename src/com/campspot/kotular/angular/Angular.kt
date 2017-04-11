@@ -47,9 +47,9 @@ external interface Location {
 }
 
 external interface Scope {
-    fun `$watch`(exp: Any, todo: (Any?) -> Unit, deepWatch: Boolean)
-    fun `$watch`(exp: Any, todo: (Any?) -> Unit)
-    fun `$apply`(func: Any): Unit
+    @JsName("\$watch") fun watch(exp: Any, todo: (Any?) -> Unit, deepWatch: Boolean)
+    @JsName("\$watch") fun watch(exp: Any, todo: (Any?) -> Unit)
+    @JsName("\$apply") fun apply(func: Any): Unit
 }
 
 external interface LocalStorage {
