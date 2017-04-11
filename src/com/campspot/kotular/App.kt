@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     todomvc.filter("filter", { FilterFilter::filter })
     todomvc.factory("todoStorage", JsArray({ TodoStorage() }))
     todomvc.directive("todoFocus", JsArray("\$timeout", ::todoFocus))
-    todomvc.controller("TodoCtrl", JsArray("\$scope", "\$location", "todoStorage", "filterFilter", ::TodoCtrl))
+    todomvc.controller("TodoCtrl", JsArray("\$scope", "\$location", "todoStorage", "filterFilter", js("TodoCtrl")))
 
     todomvc.config(JsArray("\$routeProvider", {
         routeProvider: Router ->
