@@ -9,85 +9,70 @@ import com.campspot.kotular.js.JsArray
 
 data class Todo(var title: String? = "", var completed: Boolean = false)
 
-external interface TodoScope : Scope {
-    var todos: JsArray<Todo>
-    var newTodo: String
-    var editedTodo: Todo?
-    var remainingCount: Int
-    var completedCount: Int
-    var allChecked: Boolean
-    var statusFilter: Boolean?
-    var location: Location
-    var addTodo: () -> Unit
-    var editTodo: (Todo) -> Unit
-    var doneEditing: (Todo) -> Unit
-    var removeTodo: (Todo) -> Unit
-    var clearCompletedTodos: () -> Unit
-    var markAll: (Boolean) -> Unit
-    var test: String
-}
+class TodoCtrl {
+    var todos: JsArray<Todo> = JsArray()
+    var newTodo: String = ""
+    var editedTodo: Todo? = null
+    var remainingCount: Int = 0
+    var completedCount: Int = 0
+    var allChecked: Boolean = false
+    var statusFilter: Boolean? = false
+    var location: Location? = null
+    var test: String = "jello"
 
-fun TodoCtrl(scope: TodoScope, location: Location, todoStorage: TodoStorage, filterFilter: (JsArray<Todo>, Boolean) -> JsArray<Todo>) {
-    val ctrl = controllerScope as TodoScope
+    constructor(scope: Scope, location: Location, todoStorage: TodoStorage, filterFilter: (JsArray<Todo>, Boolean) -> JsArray<Todo>) {
+        todos = todoStorage.get()
 
-    ctrl.todos = todoStorage.get()
-    ctrl.newTodo = ""
-    ctrl.editedTodo = null
-    ctrl.test = "jello"
+        scope.watch("todos", {
+            remainingCount = filterFilter(todos, false).size
+            completedCount = todos.size - remainingCount
+            completedCount = todos.size - remainingCount
+            allChecked = remainingCount == 0
+        }, true)
 
-    scope.watch("todos", {
-        ctrl.remainingCount = filterFilter(ctrl.todos, false).size
-        ctrl.completedCount = ctrl.todos.size - ctrl.remainingCount
-        ctrl.completedCount = ctrl.todos.size - ctrl.remainingCount
-        ctrl.allChecked = ctrl.remainingCount == 0
-    }, true)
+        if(location.path() == "") {
+            location.path("/")
+        }
 
-    if(location.path() == "") {
-        location.path("/")
+        this.location = location
+
+        scope.watch("location.path()", {
+            path ->
+            statusFilter = when(path) {
+                "/active" -> false
+                "/completed" -> true
+                else -> null
+            }
+        })
     }
 
-    ctrl.location = location
-
-    scope.watch("location.path()", {
-        path ->
-        ctrl.statusFilter = when(path) {
-            "/active" -> false
-            "/completed" -> true
-            else -> null
-        }
-    })
-
-    ctrl.addTodo = {
-        if(ctrl.newTodo.isNotEmpty()) {
-            ctrl.todos.push(Todo(ctrl.newTodo, false))
-            ctrl.newTodo = ""
+    fun addTodo() {
+        if(newTodo.isNotEmpty()) {
+            todos.push(Todo(newTodo, false))
+            newTodo = ""
         }
     }
 
-    ctrl.editTodo = {
-        todo ->
-        ctrl.editedTodo = todo
+    fun editTodo(todo: Todo) {
+        editedTodo = todo
     }
 
-    ctrl.doneEditing = {
-        todo ->
-        ctrl.editedTodo = null
+    fun doneEditing(todo: Todo) {
+        editedTodo = null
         if(todo.title != null) {
-            ctrl.removeTodo(todo)
+            removeTodo(todo)
         }
     }
 
-    ctrl.removeTodo = {
-        todo ->
-        ctrl.todos.splice(ctrl.todos.indexOf(todo), 1)
+    fun removeTodo(todo: Todo) {
+        todos.splice(todos.indexOf(todo), 1)
     }
 
-    ctrl.clearCompletedTodos = {
-        ctrl.todos = ctrl.todos.filter({ !it.completed })
+    fun clearCompletedTodos() {
+        todos = todos.filter({ !it.completed })
     }
 
-    ctrl.markAll = {
-        completed ->
-        ctrl.todos.forEach({ it.completed = completed })
+    fun markAll(completed: Boolean) {
+        todos.forEach({ it.completed = completed })
     }
 }
