@@ -1,6 +1,7 @@
 .idea
 out
 *.iml
+mongoose.conf
 
 Mongoose.app/Contents/Info.plist
 
