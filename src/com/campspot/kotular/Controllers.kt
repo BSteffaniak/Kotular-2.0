@@ -1,8 +1,5 @@
 package com.campspot.kotular
 
-import com.campspot.kotular.angular.*
-import com.campspot.kotular.js.JsArray
-
 /**
  * Created by bradensteffaniak on 4/11/17.
  */
@@ -20,7 +17,7 @@ class TodoController(scope: Scope, location: Location, todoStorage: TodoStorage,
     var location: Location? = null
     var test: String = "jello"
 
-    constructor(scope: Scope, location: Location, todoStorage: TodoStorage, filterFilter: (JsArray<Todo>, Boolean) -> JsArray<Todo>) {
+    init {
         todos = todoStorage.get()
 
         scope.watch("todos", {
