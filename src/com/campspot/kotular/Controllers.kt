@@ -9,7 +9,7 @@ import com.campspot.kotular.js.JsArray
 
 data class Todo(var title: String? = "", var completed: Boolean = false)
 
-class TodoCtrl {
+class TodoController(scope: Scope, location: Location, todoStorage: TodoStorage, filterFilter: (JsArray<Todo>, Boolean) -> JsArray<out Todo>) {
     var todos: JsArray<Todo> = JsArray()
     var newTodo: String = ""
     var editedTodo: Todo? = null
