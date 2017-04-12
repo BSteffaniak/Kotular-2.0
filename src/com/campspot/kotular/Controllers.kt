@@ -27,7 +27,7 @@ class TodoController(scope: Scope, location: Location, todoStorage: TodoStorage,
             allChecked = remainingCount == 0
         }, true)
 
-        if(location.path() == "") {
+        if (location.path() == "") {
             location.path("/")
         }
 
@@ -44,7 +44,7 @@ class TodoController(scope: Scope, location: Location, todoStorage: TodoStorage,
     }
 
     fun addTodo() {
-        if(newTodo.isNotEmpty()) {
+        if (newTodo.isNotEmpty()) {
             todos.push(Todo(newTodo, false))
             newTodo = ""
         }
@@ -56,7 +56,7 @@ class TodoController(scope: Scope, location: Location, todoStorage: TodoStorage,
 
     fun doneEditing(todo: Todo) {
         editedTodo = null
-        if(todo.title != null) {
+        if (todo.title != null) {
             removeTodo(todo)
         }
     }

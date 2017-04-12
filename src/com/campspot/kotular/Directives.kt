@@ -1,14 +1,13 @@
 package com.campspot.kotular
 
-import com.campspot.kotular.angular.Directive
-import com.campspot.kotular.angular.Timeout
+import com.campspot.kotular.*
 
 /**
  * Created by bradensteffaniak on 4/11/17.
  */
 
 
-external interface Attrs {
+interface Attrs {
     val todoBlur: Any
     val todoFocus: Any
 }

@@ -1,13 +1,10 @@
 package com.campspot.kotular
 
-import com.campspot.kotular.angular.LocalStorage
-import com.campspot.kotular.js.JsArray
+import com.campspot.kotular.*
 
 /**
  * Created by bradensteffaniak on 4/11/17.
  */
-
-external val localStorage: LocalStorage
 
 class TodoStorage {
     private val STORAGE_ID = "TODOS-angularjs"

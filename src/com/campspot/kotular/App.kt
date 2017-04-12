@@ -1,9 +1,6 @@
 package com.campspot.kotular
 
-import com.campspot.kotular.angular.Route
-import com.campspot.kotular.angular.Router
-import com.campspot.kotular.angular.angular
-import com.campspot.kotular.js.JsArray
+import com.campspot.kotular.*
 
 /**
  * Created by bradensteffaniak on 4/11/17.
